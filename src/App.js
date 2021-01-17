@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
 import GeogebraComponent from "./components/GeogebraComponent";
 import "./styles.css";
 
@@ -17,11 +16,7 @@ export default function App() {
   return (
     <>
       <div className="App">Hello</div>
-      {/* <div id="ggb-element"></div>
-      <Helmet>
-        <script src="https://www.geogebra.org/apps/deployggb.js" />
-      </Helmet> */}
-      <GeogebraComponent count={count} />
+      <GeogebraComponent count={0} />
     </>
   );
 }
