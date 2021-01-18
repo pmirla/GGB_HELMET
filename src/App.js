@@ -7,7 +7,8 @@ export default function App() {
   return (
     <>
       <div className="App">Hello</div>
-      <GeogebraComponent count={0} />
+      <GeogebraComponent count={0} app_id={"app_id1"} />
+      <GeogebraComponent count={1} app_id={"app_id2"} />
     </>
   );
 }

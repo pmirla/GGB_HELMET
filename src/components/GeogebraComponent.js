@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 
-export default function GeogebraComponent({ count }) {
+export default function GeogebraComponent({ count, app_id }) {
   useEffect(() => {
     debugger;
     console.log("here in componentDidMount");
@@ -31,7 +31,8 @@ export default function GeogebraComponent({ count }) {
       ggbApplet.setHTML5Codebase(
         "https://www.geogebra.org/apps/5.0.498.0/web3d"
       );
-      ggbApplet.inject("ggb-element");
+
+      ggbApplet.inject(app_id);
     }, 500);
   }, [count]);
 
@@ -41,7 +42,8 @@ export default function GeogebraComponent({ count }) {
       <Helmet>
         <script src="https://www.geogebra.org/apps/deployggb.js" />
       </Helmet>
-      <div id="ggb-element"></div>
+      {app_id}
+      <div id={app_id}></div>
     </>
   );
 }
