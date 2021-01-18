@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 
-export default function GeogebraComponent({ count, app_id }) {
+export default function GeogebraComponent(props) {
+  //{ count, app_id, newParams }
   useEffect(() => {
     debugger;
     console.log("here in componentDidMount");
@@ -9,7 +10,7 @@ export default function GeogebraComponent({ count, app_id }) {
     setTimeout(() => {
       // setCurrent(props.current)
       console.log(window.GGBApplet.name);
-      var params = {
+      var parameters = {
         width: 750,
         height: 500,
         // showToolBar: true,
@@ -24,17 +25,33 @@ export default function GeogebraComponent({ count, app_id }) {
         capturingThreshold: null,
         showToolBarHelp: true,
         errorDialogsActive: true,
-        useBrowserForJS: false,
-        material_id: "P36DgbhH"
+        useBrowserForJS: false
+        // material_id: "P36DgbhH"
       };
-      var ggbApplet = new window.GGBApplet(params, true);
+
+      parameters = { ...parameters, ...props.newParameters };
+      var views = {
+        is3D: 1,
+        AV: 1,
+        SV: 0,
+        CV: 0,
+        EV2: 0,
+        CP: 0,
+        PC: 0,
+        DA: 0,
+        FI: 0,
+        PV: 0,
+        macro: 0
+      };
+
+      var ggbApplet = new window.GGBApplet(parameters, true);
       ggbApplet.setHTML5Codebase(
         "https://www.geogebra.org/apps/5.0.498.0/web3d"
       );
 
-      ggbApplet.inject(app_id);
+      ggbApplet.inject(props.id);
     }, 500);
-  }, [count]);
+  }, [props.newParameters, props.id]);
 
   return (
     <>
@@ -42,8 +59,7 @@ export default function GeogebraComponent({ count, app_id }) {
       <Helmet>
         <script src="https://www.geogebra.org/apps/deployggb.js" />
       </Helmet>
-      {app_id}
-      <div id={app_id}></div>
+      <div id={props.id}></div>
     </>
   );
 }
